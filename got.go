@@ -14,6 +14,22 @@ func Now() *Got {
 	return &Got{time.Now()}
 }
 
+func UTC() *Got {
+	return New(time.Now().UTC())
+}
+
+func Unix(sec int64, nsec int64) *Got {
+	return New(time.Unix(sec, nsec))
+}
+
+func Epoch() *Got {
+	return Unix(0, 0)
+}
+
+func (t *Got) UTC() *Got {
+	return New(t.Time.UTC())
+}
+
 func (t *Got) BeginningOfMinute() *Got {
 	return New(t.Truncate(time.Minute))
 }
