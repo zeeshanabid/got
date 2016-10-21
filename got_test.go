@@ -44,3 +44,34 @@ func TestGotHalfOfMinute(t *testing.T) {
 	gt := New(time.Date(2016, 10, 21, 16, 20, 8, 123456789, time.UTC)).HalfOfMinute()
 	assert.Equal(t, "2016-10-21 16:20:30", gt.Format(format))
 }
+
+func TestGotBeginningOfHour(t *testing.T) {
+	gt := New(time.Date(2016, 10, 21, 16, 20, 8, 123456789, time.UTC)).BeginningOfHour()
+	assert.Equal(t, "2016-10-21 16:00:00", gt.Format(format))
+}
+
+func TestGotEndOfHour(t *testing.T) {
+	gt := New(time.Date(2016, 10, 21, 16, 20, 8, 123456789, time.UTC)).EndOfHour()
+	assert.Equal(t, "2016-10-21 16:59:59.999999999", gt.Format(format))
+}
+
+func TestGotNextHour(t *testing.T) {
+	gt := New(time.Date(2016, 10, 21, 16, 20, 8, 123456789, time.UTC)).NextHour()
+	assert.Equal(t, "2016-10-21 17:00:00", gt.Format(format))
+
+	gt = New(time.Date(2016, 10, 21, 23, 00, 00, 00, time.UTC)).NextHour()
+	assert.Equal(t, "2016-10-22 00:00:00", gt.Format(format))
+}
+
+func TestGotPreviousHour(t *testing.T) {
+	gt := New(time.Date(2016, 10, 21, 16, 20, 8, 123456789, time.UTC)).PreviousHour()
+	assert.Equal(t, "2016-10-21 15:00:00", gt.Format(format))
+
+	gt = New(time.Date(2016, 10, 21, 00, 00, 00, 00, time.UTC)).PreviousHour()
+	assert.Equal(t, "2016-10-20 23:00:00", gt.Format(format))
+}
+
+func TestGotHalfOfHour(t *testing.T) {
+	gt := New(time.Date(2016, 10, 21, 16, 20, 8, 123456789, time.UTC)).HalfOfHour()
+	assert.Equal(t, "2016-10-21 16:30:00", gt.Format(format))
+}
